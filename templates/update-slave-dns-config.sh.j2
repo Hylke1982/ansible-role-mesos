@@ -7,5 +7,8 @@ echo "DOCKER HOST IP: $DOCKER_HOST_IP"
 
 # Update mesos DNS config
 jq -r '.mesos[0].dns.nameservers[0] = "127.0.0.1"' {{ mesos_slave_dir }}/default_container_dns.json | sponge {{ mesos_slave_dir }}/default_container_dns.json
-jq -r --arg DOCKER_HOST $DOCKER_HOST_IP '.docker[0].dns.nameservers[0] = $DOCKER_HOST_IP' {{ mesos_slave_dir }}/default_container_dns.json | sponge {{ mesos_slave_dir }}/default_container_dns.json
-jq -r --arg DOCKER_HOST $DOCKER_HOST_IP '.docker[1].dns.nameservers[0] = $DOCKER_HOST_IP' {{ mesos_slave_dir }}/default_container_dns.json | sponge {{ mesos_slave_dir }}/default_container_dns.json
+echo {{ mesos_slave_dir }}/default_container_dns.json
+jq -r --arg DOCKER_HOST_IP $DOCKER_HOST_IP '.docker[0].dns.nameservers[0] = $DOCKER_HOST_IP' {{ mesos_slave_dir }}/default_container_dns.json | sponge {{ mesos_slave_dir }}/default_container_dns.json
+echo {{ mesos_slave_dir }}/default_container_dns.json
+jq -r --arg DOCKER_HOST_IP $DOCKER_HOST_IP '.docker[1].dns.nameservers[0] = $DOCKER_HOST_IP' {{ mesos_slave_dir }}/default_container_dns.json | sponge {{ mesos_slave_dir }}/default_container_dns.json
+echo {{ mesos_slave_dir }}/default_container_dns.json
