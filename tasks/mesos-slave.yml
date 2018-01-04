@@ -15,6 +15,19 @@
     mode: "u=rw,g=r,o=r"
   become: true
 
+- name: "Mesos update slave dns config"
+  template:
+    src: "update-slave-dns-config.sh.j2"
+    dest: "{{ mesos_slave_dir }}/update-slave-dns-config.sh"
+    owner: "{{ mesos_user }}"
+    group: "{{ mesos_group }}"
+    mode: "u=rwx,g=rx,o=rx"
+  become: true
+
+- name: "Update slave DNS"
+  command: "{{ mesos_slave_dir }}/update-slave-dns-config.sh"
+  become: true
+
 - name: "Mesos slave default properties files"
   template:
     src: "slave-config/{{ item }}.j2"

@@ -28,3 +28,14 @@
     line: "LOGS={{ mesos_log_dir }}"
   become: true
 
+- name: "Copy slave config script"
+  copy:
+    src: "{{item}}"
+    dest: "{{ mesos_home }}/{{item}}"
+    owner: "{{ mesos_user }}"
+    group: "{{ mesos_group }}"
+    mode: "u=rwx,g=x,o=x"
+  with_items:
+    - set-slave-config.sh
+    - set-master-config.sh
+  become: true
