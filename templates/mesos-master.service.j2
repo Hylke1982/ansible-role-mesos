@@ -1,0 +1,15 @@
+[Unit]
+Description=Mesos Master
+After=network.target
+Wants=network.target
+
+[Service]
+ExecStart=/usr/bin/mesos-init-wrapper master --work_dir={{ mesos_master_dir }}
+Restart=always
+RestartSec=20
+LimitNOFILE=16384
+User={{ mesos_user }}
+Group={{ mesos_group }}
+
+[Install]
+WantedBy=multi-user.target

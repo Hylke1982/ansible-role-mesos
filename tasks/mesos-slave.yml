@@ -1,0 +1,48 @@
+- name: "create mesos slave work_dir"
+  file:
+    path: "{{ mesos_slave_work_dir }}"
+    owner: "{{ mesos_user }}"
+    group: "{{ mesos_group }}"
+    state: directory
+  become: true
+
+- name: "Mesos container dns config for slave"
+  copy:
+    src: "default_container_dns.json"
+    dest: "{{ mesos_slave_dir }}/default_container_dns.json"
+    owner: "{{ mesos_user }}"
+    group: "{{ mesos_group }}"
+    mode: "u=rw,g=r,o=r"
+  become: true
+
+- name: "Mesos slave default properties files"
+  template:
+    src: "slave-config/{{ item }}.j2"
+    dest: "/etc/mesos-slave/{{item}}"
+    owner: "{{ mesos_user }}"
+    group: "{{ mesos_group }}"
+  with_items:
+    - containerizers
+    - default_container_dns
+    - work_dir
+    - attributes
+  become: true
+
+- name: "Install new Mesos Slave service unit"
+  template:
+    src: mesos-slave.service.j2
+    dest: /lib/systemd/system/mesos-slave.service
+    owner: root
+    group: root
+    mode: 0555
+  become: true
+
+- name: "reload systemd"
+  systemd: daemon_reload=yes
+
+- name: "Ensure Mesos slave running state"
+  service:
+    name: mesos-slave
+    state: "{{mesos_slave_service_state}}"
+    enabled: "{{mesos_slave_service_enabled}}"
+  become: true

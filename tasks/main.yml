@@ -1,0 +1,16 @@
+- name: "prerequisites"
+  include: "prerequisites.yml"
+
+- name: "user"
+  include: "user.yml"
+
+- name: "mesos-general"
+  include: "mesos-general.yml"
+
+- name: "mesos-master"
+  include: "mesos-master.yml"
+
+- name: "mesos-slave"
+  include: "mesos-slave.yml"
+
+

@@ -1,0 +1,20 @@
+- name: "Install Java"
+  package:
+    name: "openjdk-8-jdk-headless"
+    state: "latest"
+  become: true
+
+- name: "Install Policy kit"
+  package:
+    name: "policykit-1"
+    state: "latest"
+  become: true
+
+- name: "install the latest version of JQ/SPonge"
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - jq
+    - moreutils
+  become: true

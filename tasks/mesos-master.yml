@@ -1,0 +1,35 @@
+- name: "create mesos master work_dir"
+  file:
+    path: "{{ mesos_master_work_dir }}"
+    owner: "{{ mesos_user }}"
+    group: "{{ mesos_group }}"
+    state: directory
+  become: true
+
+- name: "Mesos slave default properties files"
+  template:
+    src: "master-config/{{ item }}.j2"
+    dest: "/etc/mesos-master/{{item}}"
+    owner: "{{ mesos_user }}"
+    group: "{{ mesos_group }}"
+  with_items:
+    - cluster
+    - work_dir
+  become: true
+
+- name: "Install new Mesos Master service unit"
+  template:
+    src: mesos-master.service.j2
+    dest: /lib/systemd/system/mesos-master.service
+    owner: root
+    group: root
+    mode: 0555
+  become: true
+
+
+- name: "Ensure Mesos master service state"
+  service:
+    name: mesos-master
+    state: "{{ mesos_master_service_state }}"
+    enabled: "{{ mesos_master_service_enabled }}"
+  become: true

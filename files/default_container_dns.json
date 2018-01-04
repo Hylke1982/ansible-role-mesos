@@ -1,0 +1,25 @@
+{
+  "mesos": [
+    {
+      "network_mode": "CNI",
+      "network_name": "net1",
+      "dns": {
+        "nameservers": [ "127.0.0.1","8.8.8.8", "8.8.4.4" ]
+      }
+    }
+  ],
+  "docker": [
+    {
+      "network_mode": "BRIDGE",
+      "dns": {
+        "nameservers": [ "8.8.8.8", "8.8.4.4" ]
+      }
+    },
+    {
+      "network_mode": "USER",
+      "dns": {
+        "nameservers": [ "8.8.8.8", "8.8.4.4" ]
+      }
+    }
+  ]
+}

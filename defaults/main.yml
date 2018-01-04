@@ -1,0 +1,19 @@
+mesos_user: mesos
+mesos_group: mesos
+mesos_home: /opt/mesos
+mesos_version: 1.4.1
+mesos_link: "http://repos.mesosphere.com/debian/pool/main/m/mesos/mesos_{{ mesos_version }}-2.0.1.debian9_amd64.deb"
+mesos_log_dir: "{{ mesos_home }}/logs"
+mesos_slave_dir: "{{ mesos_home }}/slave"
+mesos_slave_work_dir: "{{ mesos_slave_dir }}/work_dir"
+mesos_master_dir: "{{ mesos_home }}/master"
+mesos_master_work_dir: "{{ mesos_master_dir }}/work_dir"
+
+mesos_bind_ip: 127.0.0.1
+mesos_slave_service_enabled: no
+mesos_slave_service_state: stopped
+mesos_master_service_enabled: no
+mesos_master_service_state: stopped
+
+
+mesos_cluster_name: cluster

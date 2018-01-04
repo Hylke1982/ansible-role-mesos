@@ -1,0 +1,26 @@
+- name: "Create Mesos group"
+  group:
+    name: "{{ mesos_group }}"
+  become: true
+
+- name: "Create Mesos user"
+  user:
+    name: "{{ mesos_user }}"
+    comment: "Mesos"
+    group: "{{ mesos_group }}"
+    groups: "docker"
+    home: "{{ mesos_home }}"
+  become: true
+
+- name: "Create mesos directories"
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ mesos_user }}"
+    group: "{{ mesos_group }}"
+    mode: 0755
+  with_items:
+    - "{{ mesos_log_dir }}"
+    - "{{ mesos_slave_dir }}"
+    - "{{ mesos_master_dir }}"
+  become: true

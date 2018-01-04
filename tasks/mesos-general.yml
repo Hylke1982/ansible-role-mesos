@@ -1,0 +1,30 @@
+- name: "Add Mesos log rotation"
+  template:
+    src: mesos.logrotate.j2
+    dest: /etc/logrotate.d/mesos
+    owner: root
+    group: root
+    mode: 0544
+  become: true
+
+- name: "Install a .deb package from the internet."
+  apt:
+    deb: "{{mesos_link }}"
+  become: true
+
+- name: "Create default IP for mesos master and slave"
+  lineinfile:
+    path: "{{ item }}"
+    line: "IP=127.0.0.1"
+  with_items:
+    - "/etc/default/mesos-master"
+    - "/etc/default/mesos-slave"
+  become: true
+
+- name: "Update log dir in config"
+  lineinfile:
+    path: "/etc/default/mesos"
+    regexp: '^LOGS='
+    line: "LOGS={{ mesos_log_dir }}"
+  become: true
+

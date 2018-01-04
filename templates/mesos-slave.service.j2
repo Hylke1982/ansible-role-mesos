@@ -1,0 +1,13 @@
+[Unit]
+Description=Mesos Master
+After=network.target
+Wants=network.target
+
+[Service]
+ExecStart=/usr/bin/mesos-init-wrapper slave --work_dir={{ mesos_slave_dir }} --containerizers=docker,mesos
+Restart=always
+RestartSec=20
+LimitNOFILE=16384
+
+[Install]
+WantedBy=multi-user.target
