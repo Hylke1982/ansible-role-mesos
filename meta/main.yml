@@ -1,6 +1,8 @@
 ---
 
-dependencies: []
+dependencies:
+- { role: geerlingguy.pip }
+- { role: geerlingguy.docker }
 
 galaxy_info:
   author: Hylke Stapersma
