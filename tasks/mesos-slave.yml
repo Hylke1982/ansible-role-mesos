@@ -27,8 +27,10 @@
   with_items:
     - containerizers
     - default_container_dns
+    - docker_config
     - work_dir
     - attributes
+    - executor_registration_timeout
   become: true
 
 - name: "Install new Mesos Slave service unit"
