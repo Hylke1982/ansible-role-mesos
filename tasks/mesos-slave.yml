@@ -8,11 +8,14 @@
 
 - name: "Mesos container dns config for slave"
   copy:
-    src: "default_container_dns.json"
-    dest: "{{ mesos_slave_dir }}/default_container_dns.json"
+    src: "{{item}}"
+    dest: "{{ mesos_slave_dir }}/{{item}}"
     owner: "{{ mesos_user }}"
     group: "{{ mesos_group }}"
     mode: "u=rw,g=r,o=r"
+  with_items:
+    - default_container_dns.json
+    - docker_config.json
   become: true
 
 - name: "Mesos slave default properties files"

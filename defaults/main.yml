@@ -9,6 +9,7 @@ mesos_slave_dir: "{{ mesos_home }}/slave"
 mesos_slave_work_dir: "{{ mesos_slave_dir }}/work_dir"
 mesos_master_dir: "{{ mesos_home }}/master"
 mesos_master_work_dir: "{{ mesos_master_dir }}/work_dir"
+mesos_slave_docker_config: "docker_config.json"
 
 mesos_bind_ip: 127.0.0.1
 mesos_slave_service_enabled: no
