@@ -15,7 +15,6 @@
     mode: "u=rw,g=r,o=r"
   with_items:
     - default_container_dns.json
-    - docker_config.json
   become: true
 
 - name: "Mesos slave default properties files"
@@ -27,7 +26,6 @@
   with_items:
     - containerizers
     - default_container_dns
-    - docker_config
     - work_dir
     - attributes
     - executor_registration_timeout
