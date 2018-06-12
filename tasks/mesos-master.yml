@@ -6,7 +6,7 @@
     state: directory
   become: true
 
-- name: "Mesos slave default properties files"
+- name: "Mesos master default properties files"
   template:
     src: "master-config/{{ item }}.j2"
     dest: "/etc/mesos-master/{{item}}"
@@ -15,6 +15,20 @@
   with_items:
     - cluster
     - work_dir
+    - acls
+    - credentials
+  become: true
+
+- name: "Mesos master files"
+  copy:
+    src: "{{item}}"
+    dest: "{{ mesos_master_dir }}/{{item}}"
+    owner: "{{ mesos_user }}"
+    group: "{{ mesos_group }}"
+    mode: "u=rw,g=r,o=r"
+  with_items:
+    - acls.json
+    - credentials.json
   become: true
 
 - name: "Install new Mesos Master service unit"
