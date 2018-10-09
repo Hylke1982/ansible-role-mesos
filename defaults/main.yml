@@ -2,7 +2,7 @@ mesos_user: mesos
 mesos_group: mesos
 mesos_home: /opt/mesos
 mesos_cluster_name: cluster
-mesos_version: 1.5.0
+mesos_version: 1.7.0
 mesos_link: "http://repos.mesosphere.com/debian/pool/main/m/mesos/mesos_{{ mesos_version }}-2.0.1.debian9_amd64.deb"
 mesos_log_dir: "{{ mesos_home }}/logs"
 mesos_slave_dir: "{{ mesos_home }}/slave"
