@@ -17,4 +17,5 @@
   with_items:
     - jq
     - moreutils
+    - libcurl4-nss-dev
   become: true
